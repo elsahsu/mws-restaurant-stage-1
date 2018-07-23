@@ -11,6 +11,9 @@ self.addEventListener('install', function(event) {
         'css/styles.css',
         'img/'
       ]);
+    }).catch(function(error) {
+        console.log('Failed to add files to cache');
+        console.log(error);
     })
   );
 });
@@ -18,6 +21,7 @@ self.addEventListener('install', function(event) {
 self.addEventListener('fetch', function(event) {
   event.respondWith(
     caches.match(event.request).then(function(response) {
+      console.log('Fetching from cache');
       return response || fetch(event.request);
     })
   );
