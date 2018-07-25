@@ -16,12 +16,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
 });
 
 function registerServiceWorker() {
+  console.log('Registering ServiceWorker');
   if (!navigator.serviceWorker) {
     console.log('ServiceWorker not supported');
     return;
   }
 
-  // navigator.serviceWorker.register('js/sw.js');
+  navigator.serviceWorker.register('js/sw.js');
 }
 
 /**

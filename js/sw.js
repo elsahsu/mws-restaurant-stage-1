@@ -5,20 +5,33 @@ self.addEventListener('install', function(event) {
   console.log("Saving static files to cache");
   event.waitUntil(
     caches.open(CACHE_NAME).then(function(cache) {
+      console.log("Caching...");
       return cache.addAll([
-        '/',
-        'js/main.js',
-        'css/styles.css',
-        'img/'
-      ]);
-    }).catch(function(error) {
+        '/index.html',
+        '/css/styles.css',
+        '/js/main.js',
+        '/js/dbhelper.js',
+        '/js/restaurant_info.js',
+        '/js/sw.js'
+      ])
+      .catch(function(error) {
         console.log('Failed to add files to cache');
         console.log(error);
+      });
     })
   );
 });
 
 self.addEventListener('fetch', function(event) {
+  console.log('Fetching');
+  var requestUrl = new URL(event.request.url);
+  if (requestUrl.origin === location.origin) {
+    if (requestUrl.pathname === '/') {
+      event.respondWith.caches.match('index.html');
+      return;
+    }
+  }
+
   event.respondWith(
     caches.match(event.request).then(function(response) {
       console.log('Fetching from cache');
