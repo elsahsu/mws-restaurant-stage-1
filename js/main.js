@@ -22,7 +22,7 @@ function registerServiceWorker() {
     return;
   }
 
-  navigator.serviceWorker.register('js/sw.js');
+  navigator.serviceWorker.register('sw.js');
 }
 
 /**
