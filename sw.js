@@ -31,8 +31,18 @@ self.addEventListener('fetch', event => {
   if (event.request.url.startsWith(self.location.origin)) {
     event.respondWith(
       caches.match(event.request).then(function(response) {
-        console.log('Fetching from cache');
-        return response || fetch(event.request);
+        console.log('Fetching from cache:', event.request);
+        if (response) {
+          console.log('Serving request from cache');
+          return response;
+        }
+        return fetch(event.request).then(function(response) {
+          return caches.open(CACHE_NAME).then(function(cache) {
+            console.log('Request not found in cache, caching now');
+            cache.put(event.request.url, response.clone());
+            return response;
+          });
+        })
       })
     );
   }
