@@ -159,22 +159,49 @@ nav h1 a {
 
 /* ====================== Restaurant Listing ====================== */
 #restaurants-list {
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   background-color: #f3f3f3;
   list-style: outside none none;
-  margin: 0;
-  padding: 10px 15px 10px;
+  margin: 0px;
+  padding: 5px;
   text-align: center;
 }
+
 #restaurants-list li {
   background-color: #fff;
   border: 2px solid #ccc;
   font-family: Arial,sans-serif;
-  margin: 5pt;
+  margin: 2pt;
   text-align: left;
-  width: 270px;
+  width: 48%;
 }
+
+@media screen and (max-width: 400pt) {
+  #restaurants-list li {
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 600pt) and (max-width: 800pt) {
+  #restaurants-list li {
+    width: 32%;
+  }
+}
+
+@media screen and (min-width: 801pt) and (max-width: 1000pt) {
+  #restaurants-list li {
+    width: 24%;
+  }
+}
+
+@media screen and (min-width: 1001pt) {
+  #restaurants-list li {
+    width: 19%;
+  }
+}
+
 #restaurants-list .restaurant-img {
   background-color: #ccc;
   display: block;
